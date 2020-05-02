@@ -1,4 +1,4 @@
-# A tile for Laravel Dashboard that displays football standings of different leagues
+# A tile for Laravel Dashboard that displays football standings of different leagues and actual football livescores
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/kayschima/laravel-dashboard-footballdata-standings-tile.svg?style=flat-square)](https://packagist.org/packages/kayschima/laravel-dashboard-footballdata-standings-tile)[![Total Downloads](https://img.shields.io/packagist/dt/kayschima/laravel-dashboard-footballdata-standings-tile.svg?style=flat-square)](https://packagist.org/packages/kayschima/laravel-dashboard-footballdata-standings-tile)
 
@@ -10,7 +10,7 @@ The MIT License (MIT). Please see [License File](LICENSE.md) for more informatio
 
 ## Installation
 You can install the tile via composer:
-```
+```bash
 composer require kayschima/laravel-dashboard-footballdata-standings-tile
 ```
 
@@ -33,7 +33,11 @@ return [
     ],
 ];
 ```
-In app\Console\Kernel.php you should schedule the `Kayschima\FootballStandingsTile\Commands\FetchFootballStandingsDataCommand` to run every minute.
+In app\Console\Kernel.php you should schedule 
+* the `Kayschima\FootballStandingsTile\Commands\FetchFootballStandingsDataCommand` and
+* the `Kayschima\FootballStandingsTile\Commands\FetchFootballLiveResultsDataCommand`
+
+to run every minute.
 ```php
 // in app/console/Kernel.php
 
@@ -42,22 +46,25 @@ use Kayschima\FootballStandingsTile\Commands\FetchFootballStandingsDataCommand;
 protected function schedule(Schedule $schedule)
 {
     // ...
-    $schedule->command(FetchFootballStandingsDataCommand::class)->everyMinute();;
+    $schedule->command(FetchFootballStandingsDataCommand::class)->everyMinute();
+    $schedule->command(FetchFootballLiveResultsDataCommand::class)->everyMinute();
 }      
 ```
-## View
-In your dashboard view you use the `livewire:football-standings-tile` component.
+## Views
+In your dashboard views you use 
+* the `livewire:football-standings-tile` component and/or
+* the `football-live-results-tile` component.
 
-An optional `$highlight`-attribute to the tile triggers a simple highlighting of e.g. the local or favourite team. I expect this to be a common use case for the tile.
+An optional `$highlight`-attribute to the `livewire:football-standings-tile` triggers a simple highlighting of e.g. the local or favourite team what is expected to be a common use case for the tile.
 
 For simplicity, this commit uses the id of the team, specific to every competition -- `"4"` in this case for BVB @ 1. Bundesliga.
 ```html
 <x-dashboard>
     <livewire:football-standings-tile position="a1" highlight="4" />
-    <livewire:football-standings-tile position="b1" />
+    <livewire:football-live-results-tile position="b1"/>
 </x-dashboard>
 ```
-#### Customizing the view
+#### Customizing the views
 ```bash
 php artisan vendor:publish --provider="Kayschima\FootballStandingsTile\FootballStandingsTileServiceProvider" --tag="dashboard-football-standings-tile-views"
 ```
