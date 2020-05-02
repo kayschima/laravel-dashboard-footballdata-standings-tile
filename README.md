@@ -53,7 +53,7 @@ protected function schedule(Schedule $schedule)
 ## Views
 In your dashboard views you use 
 * the `livewire:football-standings-tile` component and/or
-* the `football-live-results-tile` component.
+* the `livewire:football-live-results-tile` component.
 
 An optional `$highlight`-attribute to the `livewire:football-standings-tile` triggers a simple highlighting of e.g. the local or favourite team what is expected to be a common use case for the tile.
 
