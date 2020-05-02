@@ -1,24 +1,24 @@
 <x-dashboard-tile :position="$position">
     <h1>{{ $standings['competition']['name'] }}</h1>
-    <table class="table-fixed border text-xs">
+    <table class="text-xs border table-fixed">
         <thead>
         <tr>
-            <th>#</th>
-            <th></th>
-            <th>Team</th>
-            <th>Points</th>
-            <th>Goals</th>
+            <th class="px-1">#</th>
+            <th class="px-1"></th>
+            <th class="px-1">Team</th>
+            <th class="px-1">Points</th>
+            <th class="px-1">Goals</th>
         </tr>
         </thead>
         <tbody>
 
     @foreach($standings['standings'][0]['table'] as $rank)
-            <tr>
-                <td class="border">{{ $rank['position']}}</td>
-                <td class="border"><img style="height: 20px;" src="{{ $rank['team']['crestUrl'] }}" alt="{{ $rank['team']['name']}}"></td>
-                <td class="border">{{ $rank['team']['name']}}</td>
-                <td class="border">{{ $rank['points']}}</td>
-                <td class="border">{{ $rank['goalsFor'] . ' : ' . $rank['goalsAgainst'] }}</td>
+            <tr class="{{ $rank['team']['id'] === $highlight ? 'bg-gray-200 font-semibold' : '' }}">
+                <td class="px-1 text-center border">{{ $rank['position']}}</td>
+                <td class="flex justify-center px-1 border"><img style="height: 20px;" src="{{ $rank['team']['crestUrl'] }}" alt="{{ $rank['team']['name']}}"></td>
+                <td class="px-1 border">{{ $rank['team']['name']}}</td>
+                <td class="px-1 text-center border">{{ $rank['points']}}</td>
+                <td class="px-1 border">{{ $rank['goalsFor'] . ' : ' . $rank['goalsAgainst'] }}</td>
             </tr>
     @endforeach
 
