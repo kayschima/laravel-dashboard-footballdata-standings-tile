@@ -1,4 +1,4 @@
-<x-dashboard-tile :position="$position">
+<x-dashboard-tile :position="$position" refresh-interval="60">
     <h1>{{ $standings['competition']['name'] }}</h1>
     <table class="text-xs border table-fixed">
         <thead>
