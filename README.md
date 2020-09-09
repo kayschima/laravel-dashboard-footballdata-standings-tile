@@ -42,6 +42,7 @@ to run every minute.
 // in app/console/Kernel.php
 
 use Kayschima\FootballStandingsTile\Commands\FetchFootballStandingsDataCommand;
+use Kayschima\FootballStandingsTile\Commands\FetchFootballLiveResultsDataCommand;
 
 protected function schedule(Schedule $schedule)
 {

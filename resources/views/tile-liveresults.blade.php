@@ -1,4 +1,4 @@
-<x-dashboard-tile :position="$position">
+<x-dashboard-tile :position="$position" refresh-interval="15">
     <h1 class="underline">Live football results</h1>
     @if($liveresults['count'] === 0)
         <p class="text-xs">There are no live results right now !</p>
